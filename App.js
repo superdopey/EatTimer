@@ -10,10 +10,10 @@ export default class App extends React.Component {
         super(props) 
         //this.spinValue = new Animated.Value(0)
 this.state = {
-      sizeValue: new Animated.Value(1),
-      cycleValue: new Animated.Value(1),
-      angle: new Animated.Value(0),
-      spinValue: new Animated.Value(0)
+        greenTimer: (1000 ),
+        orangeTimer: (1000 * 60 * 5),
+        redTimer: (1000 * 60 * 5), 
+      //spinValue: new Animated.Value(0)
     }
 
     /*
@@ -26,9 +26,7 @@ this.state = {
           */
     }
 /*
-<BoxView color="red" darkcolor="maroon" timer={this.state.redTimer } delay={this.state.greenTimer + this.state.orangeTimer}  ></BoxView>
-          <BoxView color="orange" darkcolor="#806300"  timer={this.state.orangeTimer } delay={this.state.greenTimer} ></BoxView>
-          <BoxView color="lawngreen" darkcolor="darkgreen"  timer={this.state.greenTimer } delay={0} ></BoxView>
+
 */
 
 shouldComponentUpdate() {
@@ -36,29 +34,10 @@ shouldComponentUpdate() {
   }
 
 componentDidMount () {
-  this.spin()
-
-  // this.cycleAnimation();
+  //this.spin()
 }
 
-cycleAnimation () {
-    Animated.sequence([
-      Animated.timing(this.state.cycleValue, {
-        toValue: -30,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-      Animated.timing(this.state.cycleValue, {
-        toValue: 0,
-        duration: 500,
-        useNativeDriver: true,
-      }),
-    ]).start((e) => {
-      if (e.finished)
-        this.cycleAnimation()
-    })
-  }
-
+/*
 spin () {  
   Animated.timing(
     this.state.spinValue,
@@ -75,31 +54,32 @@ spin () {
   })
 }
 
+
+
+            <Animated.Image
+        style={{
+          width: 227,
+          height: 200,
+          transform: [{rotate: this.state.spinValue.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ['0deg', '360deg']
+                        })}] 
+          }}
+          source={{uri: 'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png'}}
+      />
+
+*/
+
+
   render() {
  
 
     return (
       <View style={{flex: 1,backgroundColor:'powderblue' }}>
         <View style={{ flex:.9,alignItems:'center', marginTop:30}} >
-            <Animated.Image
-        style={{
-          width: 227,
-          height: 200,
-          transform: [{rotate: this.state.spinValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0deg', '360deg']
-  })}] 
-          /*
-        transform: [
-                  {translateY: this.state.cycleValue},
-                  {scale: this.state.sizeValue}                  
-                ]
-                */
-
-          }}
-          source={{uri: 'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png'}}
-      />
-          
+          <BoxView color="red" darkcolor="maroon" timer={this.state.redTimer } delay={this.state.greenTimer + this.state.orangeTimer}  ></BoxView>
+          <BoxView color="orange" darkcolor="#806300"  timer={this.state.orangeTimer } delay={this.state.greenTimer} ></BoxView>
+          <BoxView color="lawngreen" darkcolor="darkgreen"  timer={this.state.greenTimer } delay={0} ></BoxView>          
         </View>
         <View style={{ flex:.1, backgroundColor: 'silver'}} >
           <Text>knoppen</Text> 
